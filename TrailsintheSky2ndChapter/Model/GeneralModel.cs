@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TrailsintheSky2ndChapter.Model
+﻿namespace TrailsintheSky2ndChapter.Model
 {
 	internal class GeneralModel
 	{
