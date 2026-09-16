@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TrailsintheSky2ndChapter
+﻿namespace TrailsintheSky2ndChapter
 {
 	internal class Util
 	{
