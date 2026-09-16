@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using TrailsintheSky2ndChapter.Model;
+﻿using TrailsintheSky2ndChapter.Model;
 
 namespace TrailsintheSky2ndChapter.ViewModel
 {
