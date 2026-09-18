@@ -14,7 +14,7 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="File">
-				<MenuItem Header="Load" Command="{Binding LoadFileCommand}"/>
+				<MenuItem Header="Open" Command="{Binding LoadFileCommand}"/>
 				<MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
 			</MenuItem>
 		</Menu>
