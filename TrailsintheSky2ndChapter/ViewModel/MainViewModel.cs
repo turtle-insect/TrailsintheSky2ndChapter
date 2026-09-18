@@ -14,11 +14,15 @@ namespace TrailsintheSky2ndChapter.ViewModel
 
 		public ICommand LoadFileCommand { get; init; }
 		public ICommand SaveFileCommand { get; init; }
+		public ICommand ExportFileCommand { get; init; }
+		public ICommand ImportFileCommand { get; init; }
 
 		public MainViewModel()
 		{
 			LoadFileCommand = new ActionCommand(LoadFile);
 			SaveFileCommand = new ActionCommand(SaveFile);
+			ExportFileCommand = new ActionCommand(ExportFile);
+			ImportFileCommand = new ActionCommand(ImportFile);
 		}
 
 		private void LoadFile(object? parameter)
@@ -35,9 +39,24 @@ namespace TrailsintheSky2ndChapter.ViewModel
 
 		private void SaveFile(object? parameter)
 		{
-			if (General == null) return;
+			_saveData.Reflection(General.Model);
+			_saveData.Save();
+		}
 
-			_saveData.Save(General.Model);
+		private void ExportFile(object? parameter)
+		{
+			SaveFileDialog dlg = new();
+			if (dlg.ShowDialog() == false) return;
+
+			System.IO.File.WriteAllBytes(dlg.FileName, _saveData.Body);
+		}
+
+		private void ImportFile(object? parameter)
+		{
+			OpenFileDialog dlg = new();
+			if (dlg.ShowDialog() == false) return;
+
+			_saveData.Body = System.IO.File.ReadAllBytes(dlg.FileName);
 		}
 	}
 }

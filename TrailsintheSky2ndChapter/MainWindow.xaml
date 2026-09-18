@@ -16,6 +16,9 @@
 			<MenuItem Header="File">
 				<MenuItem Header="Open" Command="{Binding LoadFileCommand}"/>
 				<MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
+				<Separator/>
+				<MenuItem Header="Import" Command="{Binding ImportFileCommand}"/>
+				<MenuItem Header="Export" Command="{Binding ExportFileCommand}"/>
 			</MenuItem>
 		</Menu>
 		<TabControl>

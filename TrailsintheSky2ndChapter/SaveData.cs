@@ -5,9 +5,9 @@ namespace TrailsintheSky2ndChapter
 {
 	internal class SaveData
 	{
+		public byte[] Body { get; set; } = [];
 		private string _filename = string.Empty;
 		private byte[] _header = [];
-		private byte[] _body = [];
 
 		public GeneralModel Load(string filename)
 		{
@@ -20,26 +20,30 @@ namespace TrailsintheSky2ndChapter
 			GeneralModel general = new();
 
 			var crc = BitConverter.ToUInt32(buffer, 0x08);
-			if (crc != CalcCRC(ref buffer)) return general;
+			if (crc != CalcCRC(buffer)) return general;
 
 			_filename = filename;
-			_body = buffer;
+			Body = buffer;
 
 			general.Money = BitConverter.ToUInt32(buffer, 0x20B640);
 
 			return general;
 		}
 
-		public void Save(GeneralModel general)
+		public void Save()
 		{
-			BinaryPrimitives.WriteUInt32LittleEndian(_body.AsSpan(0x20B640, 4), general.Money);
-
-			var crc = CalcCRC(ref _body);
-			BinaryPrimitives.WriteUInt32LittleEndian(_body.AsSpan(0x08, 4), crc);
-			System.IO.File.WriteAllBytes(_filename, [.._header, .._body]);
+			System.IO.File.WriteAllBytes(_filename, [.._header, .. Body]);
 		}
 
-		private uint CalcCRC(ref byte[] buffer)
+		public void Reflection(GeneralModel general)
+		{
+			BinaryPrimitives.WriteUInt32LittleEndian(Body.AsSpan(0x20B640, 4), general.Money);
+
+			var crc = CalcCRC(Body);
+			BinaryPrimitives.WriteUInt32LittleEndian(Body.AsSpan(0x08, 4), crc);
+		}
+
+		private uint CalcCRC(byte[] buffer)
 		{
 			var tables = new uint[256];
 			for (uint i = 0; i < tables.Length; i++)
