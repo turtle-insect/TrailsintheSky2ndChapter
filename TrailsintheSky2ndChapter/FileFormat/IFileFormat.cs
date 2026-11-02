@@ -1,4 +1,4 @@
-﻿namespace TrailsintheSky2ndChapter
+﻿namespace TrailsintheSky2ndChapter.FileFormat
 {
 	internal interface IFileFormat
 	{

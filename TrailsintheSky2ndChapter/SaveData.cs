@@ -1,4 +1,6 @@
-﻿namespace TrailsintheSky2ndChapter
+﻿using TrailsintheSky2ndChapter.FileFormat;
+
+namespace TrailsintheSky2ndChapter
 {
 	internal class SaveData
 	{
