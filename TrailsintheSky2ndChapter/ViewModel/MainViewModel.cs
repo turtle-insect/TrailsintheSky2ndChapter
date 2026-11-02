@@ -8,9 +8,7 @@ namespace TrailsintheSky2ndChapter.ViewModel
 	{
 		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private SaveData _saveData = new();
-
-		public GeneralViewModel General { get; private set; } = new(new Model.GeneralModel());
+		public GeneralViewModel General { get; init; } = new();
 
 		public ICommand LoadFileCommand { get; init; }
 		public ICommand SaveFileCommand { get; init; }
@@ -25,22 +23,23 @@ namespace TrailsintheSky2ndChapter.ViewModel
 			ImportFileCommand = new ActionCommand(ImportFile);
 		}
 
+		private void Initialize()
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(General)));
+		}
+
 		private void LoadFile(object? parameter)
 		{
 			OpenFileDialog dlg = new();
 			if (dlg.ShowDialog() == false) return;
 
-			var general = _saveData.Load(dlg.FileName);
-			if (general == null) return;
-
-			General = new(general);
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(General)));
+			SaveData.Instance().Open(dlg.FileName, false, SaveData.PlatForm.Switch);
+			Initialize();
 		}
 
 		private void SaveFile(object? parameter)
 		{
-			_saveData.Reflection(General.Model);
-			_saveData.Save();
+			SaveData.Instance().Save();
 		}
 
 		private void ExportFile(object? parameter)
@@ -48,7 +47,7 @@ namespace TrailsintheSky2ndChapter.ViewModel
 			SaveFileDialog dlg = new();
 			if (dlg.ShowDialog() == false) return;
 
-			System.IO.File.WriteAllBytes(dlg.FileName, _saveData.Body);
+			SaveData.Instance().Export(dlg.FileName);
 		}
 
 		private void ImportFile(object? parameter)
@@ -56,7 +55,8 @@ namespace TrailsintheSky2ndChapter.ViewModel
 			OpenFileDialog dlg = new();
 			if (dlg.ShowDialog() == false) return;
 
-			_saveData.Body = System.IO.File.ReadAllBytes(dlg.FileName);
+			SaveData.Instance().Import(dlg.FileName);
+			Initialize();
 		}
 	}
 }

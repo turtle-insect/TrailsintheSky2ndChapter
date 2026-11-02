@@ -1,23 +1,11 @@
-﻿using TrailsintheSky2ndChapter.Model;
-
-namespace TrailsintheSky2ndChapter.ViewModel
+﻿namespace TrailsintheSky2ndChapter.ViewModel
 {
 	internal class GeneralViewModel
 	{
-		public GeneralModel Model { get; init; }
-		public GeneralViewModel(GeneralModel model)
-		{
-			Model = model;
-		}
-
 		public uint Money
 		{
-			get => Model.Money;
-			set
-			{
-				value = Util.ValidationValue(0, 99999999, value);
-				Model.Money = value;
-			}
+			get => SaveData.Instance().ReadNumber(0x20B640, 4);
+			set => Util.WriteNumber(0, 99999999, 0x20B640, 4, value);
 		}
 	}
 }
