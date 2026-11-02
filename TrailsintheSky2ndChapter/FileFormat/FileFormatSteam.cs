@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TrailsintheSky2ndChapter.FileFormat
+﻿namespace TrailsintheSky2ndChapter.FileFormat
 {
 	internal class FileFormatSteam : IFileFormat
 	{
