@@ -65,6 +65,9 @@
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal">
+								<Button Content="..." Width="50"
+										Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoicePartyCommand}"
+										CommandParameter="{Binding}"/>
 								<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
 								<Label Content="{Binding Value, Converter={StaticResource CharacterIDConverter}}"/>
 							</StackPanel>

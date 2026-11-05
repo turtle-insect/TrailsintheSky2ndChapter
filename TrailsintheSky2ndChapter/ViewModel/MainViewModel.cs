@@ -16,6 +16,7 @@ namespace TrailsintheSky2ndChapter.ViewModel
 		public ICommand SaveFileCommand { get; init; }
 		public ICommand ExportFileCommand { get; init; }
 		public ICommand ImportFileCommand { get; init; }
+		public ICommand ChoicePartyCommand { get; init; }
 
 		private Info Info { get; init; } = Info.Instance();
 
@@ -25,6 +26,7 @@ namespace TrailsintheSky2ndChapter.ViewModel
 			SaveFileCommand = new ActionCommand(SaveFile);
 			ExportFileCommand = new ActionCommand(ExportFile);
 			ImportFileCommand = new ActionCommand(ImportFile);
+			ChoicePartyCommand = new ActionCommand(ChoiceParty);
 		}
 
 		private void Initialize()
@@ -67,6 +69,19 @@ namespace TrailsintheSky2ndChapter.ViewModel
 
 			SaveData.Instance().Import(dlg.FileName);
 			Initialize();
+		}
+
+		private void ChoiceParty(object? parameter)
+		{
+			var number = parameter as NumberValue;
+			if (number == null) return;
+
+			var dlg = new ChoiceWindow();
+			dlg.Type = ChoiceWindow.ChoiceType.Chara;
+			dlg.ID = number.Value;
+			dlg.ShowDialog();
+
+			number.Value = dlg.ID;
 		}
 	}
 }
