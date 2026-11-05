@@ -2,7 +2,7 @@
 {
 	internal class Util
 	{
-		public static void WriteNumber(uint min, uint max, uint address, uint size, uint value)
+		public static void WriteNumber(uint address, uint size, uint value, uint min, uint max)
 		{
 			if(value < min) value = min;
 			if(value > max) value = max;
