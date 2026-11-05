@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -9,6 +10,7 @@ namespace TrailsintheSky2ndChapter.ViewModel
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public GeneralViewModel General { get; init; } = new();
+		public ObservableCollection<NumberValue> Party { get; init; } = new();
 
 		public ICommand LoadFileCommand { get; init; }
 		public ICommand SaveFileCommand { get; init; }
@@ -25,6 +27,12 @@ namespace TrailsintheSky2ndChapter.ViewModel
 
 		private void Initialize()
 		{
+			Party.Clear();
+			for (uint index = 0; index < 64; index++)
+			{
+				Party.Add(new NumberValue(0x51454 + index * 2, 2));
+			}
+
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(General)));
 		}
 

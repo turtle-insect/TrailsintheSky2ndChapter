@@ -57,6 +57,17 @@
 					<TextBox Grid.Row="9" Grid.Column="1" Text="{Binding General.Mass, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
 			</TabItem>
+			<TabItem Header="Party">
+				<ListBox ItemsSource="{Binding Party}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</TabItem>
 		</TabControl>
 	</DockPanel>
 </Window>
