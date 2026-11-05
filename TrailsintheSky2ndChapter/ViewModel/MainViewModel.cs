@@ -17,6 +17,8 @@ namespace TrailsintheSky2ndChapter.ViewModel
 		public ICommand ExportFileCommand { get; init; }
 		public ICommand ImportFileCommand { get; init; }
 
+		private Info Info { get; init; } = Info.Instance();
+
 		public MainViewModel()
 		{
 			LoadFileCommand = new ActionCommand(LoadFile);

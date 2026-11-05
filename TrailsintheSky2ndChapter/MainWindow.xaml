@@ -11,6 +11,9 @@
 	<Window.DataContext>
 		<viewmodel:MainViewModel/>
 	</Window.DataContext>
+	<Window.Resources>
+		<local:CharacterIDConverter x:Key="CharacterIDConverter"/>
+	</Window.Resources>
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="File">
@@ -63,6 +66,7 @@
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal">
 								<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+								<Label Content="{Binding Value, Converter={StaticResource CharacterIDConverter}}"/>
 							</StackPanel>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
