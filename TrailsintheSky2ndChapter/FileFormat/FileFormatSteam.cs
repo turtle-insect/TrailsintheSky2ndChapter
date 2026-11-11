@@ -45,23 +45,24 @@ namespace TrailsintheSky2ndChapter.FileFormat
 
 		public static Byte[] Compression(Byte[] buffer)
 		{
-			using MemoryStream input = new(buffer);
-			using MemoryStream output = new();
-			using System.IO.Compression.ZstandardStream zstd = new(output, System.IO.Compression.CompressionLevel.Optimal);
+			using System.IO.MemoryStream output = new();
+			using (System.IO.Compression.ZstandardStream zstd = new(output, System.IO.Compression.CompressionLevel.Optimal))
+			{
+				zstd.Write(buffer);
+			}
 
-			input.CopyTo(zstd);
-			zstd.Flush();
 			return output.ToArray();
 		}
 
 		public static Byte[] Decompress(Byte[] buffer)
 		{
-			using MemoryStream input = new(buffer);
-			using System.IO.Compression.ZstandardStream zstd = new(input, System.IO.Compression.CompressionMode.Decompress);
-			using MemoryStream output = new();
+			using System.IO.MemoryStream input = new(buffer);
+			using System.IO.MemoryStream output = new();
+			using (System.IO.Compression.ZstandardStream zstd = new(input, System.IO.Compression.CompressionMode.Decompress))
+			{
+				zstd.CopyTo(output);
+			}
 
-			zstd.CopyTo(output);
-			output.Flush();
 			return output.ToArray();
 		}
 	}
