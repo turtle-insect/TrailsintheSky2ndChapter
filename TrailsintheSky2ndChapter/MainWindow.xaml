@@ -24,6 +24,11 @@
 				<MenuItem Header="Export" Command="{Binding ExportFileCommand}"/>
 			</MenuItem>
 		</Menu>
+		<!--
+		<ToolBar DockPanel.Dock="Top">
+			<ComboBox ItemsSource="{Binding Platforms}" SelectedItem="{Binding SelectPlatform}"/>
+		</ToolBar>
+		-->
 		<TabControl>
 			<TabItem Header="General">
 				<Grid ColumnDefinitions="*, *, 20, 5, *, *, 20">

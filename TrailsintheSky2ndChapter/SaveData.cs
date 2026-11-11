@@ -29,6 +29,12 @@ namespace TrailsintheSky2ndChapter
 		{
 			if (!System.IO.File.Exists(filename)) return false;
 
+			mFileFormat = platform switch
+			{
+				PlatForm.STEAM => new FileFormatSteam(),
+				_ => new FileFormatSwitch(),
+			};
+
 			mBuffer = mFileFormat.Load(filename);
 
 			if (!force)
@@ -250,7 +256,7 @@ namespace TrailsintheSky2ndChapter
 			int offset = 0x0C;
 			int count = 0x82F51 * 4;
 
-			if (mBuffer.Length <= offset + count) return 0;
+			if (mBuffer.Length < offset + count) return 0;
 
 			for (int i = 0; i < count; i++)
 			{

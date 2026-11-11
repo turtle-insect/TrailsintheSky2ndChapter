@@ -20,6 +20,9 @@ namespace TrailsintheSky2ndChapter.ViewModel
 
 		private Info Info { get; init; } = Info.Instance();
 
+		public SaveData.PlatForm[] Platforms => Enum.GetValues<SaveData.PlatForm>();
+		public SaveData.PlatForm SelectPlatform { get; set; } = SaveData.PlatForm.Switch;
+
 		public MainViewModel()
 		{
 			LoadFileCommand = new ActionCommand(LoadFile);
@@ -45,7 +48,7 @@ namespace TrailsintheSky2ndChapter.ViewModel
 			OpenFileDialog dlg = new();
 			if (dlg.ShowDialog() == false) return;
 
-			SaveData.Instance().Open(dlg.FileName, false, SaveData.PlatForm.Switch);
+			SaveData.Instance().Open(dlg.FileName, false, SelectPlatform);
 			Initialize();
 		}
 
