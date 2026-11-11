@@ -13,4 +13,4 @@ https://store.steampowered.com/app/4225980
 
 # Performance
 * Windows 11
-* [.NET 10](https://dotnet.microsoft.com/ja-jp/download/dotnet/10.0)
+* [.NET 11](https://dotnet.microsoft.com/ja-jp/download/dotnet/11.0)
