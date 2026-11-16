@@ -80,6 +80,9 @@ namespace TrailsintheSky2ndChapter
 		public void Export(String filename)
 		{
 			if (mBuffer == null) return;
+
+			var checksum = CalcCheckSum();
+			WriteNumber(0x08, 4, checksum);
 			System.IO.File.WriteAllBytes(filename, mBuffer);
 		}
 
