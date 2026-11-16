@@ -46,7 +46,14 @@ namespace TrailsintheSky2ndChapter.FileFormat
 		public static Byte[] Compression(Byte[] buffer)
 		{
 			using System.IO.MemoryStream output = new();
-			using (System.IO.Compression.ZstandardStream zstd = new(output, System.IO.Compression.CompressionLevel.Optimal))
+
+			System.IO.Compression.ZstandardCompressionOptions options = new()
+			{
+				Quality = 19,
+				AppendChecksum = false,
+			};
+
+			using (System.IO.Compression.ZstandardStream zstd = new(output, options))
 			{
 				zstd.Write(buffer);
 			}
